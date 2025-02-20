@@ -6,6 +6,10 @@ import CreateConstellation from  './pages/CreateConstellation';
 import LandingPage from './pages/LandingPage';
 import { SignupPage, LoginPage } from './pages/Authentication';
 
+const RedirectSite = () => {
+  window.location.href = "./solarsystem/index.html";
+  return <></>;
+};
 
 function App() {
   return (
@@ -17,6 +21,7 @@ function App() {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/solarsystem" element={<RedirectSite />} />
       </Routes>
     </Router>
   );
