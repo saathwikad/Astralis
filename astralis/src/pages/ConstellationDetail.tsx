@@ -157,7 +157,7 @@ const ConstellationDetail: React.FC = () => {
   return (
     <div className="h-screen bg-gray-900">
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/starconstellation')}
         className="absolute top-4 left-4 z-10 px-4 py-2 bg-gray-800 rounded-lg 
                    text-white hover:bg-blue-600 transition-colors duration-300"
       >

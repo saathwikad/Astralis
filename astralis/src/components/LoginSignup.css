@@ -1,0 +1,83 @@
+/* src/components/LoginSignup.css */
+.login-signup-container {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 0.5rem 1rem;
+    background: #555;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .back-btn:hover {
+    background: #777;
+  }
+  
+  .form-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .form-container h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-container input {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .form-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .toggle-link {
+    color: #4ecdc4;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .toggle-link:hover {
+    text-decoration: underline;
+  }

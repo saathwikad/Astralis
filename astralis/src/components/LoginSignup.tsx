@@ -1,27 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { useNavigate } from 'react-router-dom';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
-  updateProfile,
-  signOut
-} from 'firebase/auth';
-import { auth } from '../firebase/config';
 
 const AuthPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const [successMessage, setSuccessMessage] = useState('');
 
   // Form state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -144,54 +133,18 @@ const AuthPage: React.FC = () => {
     };
   }, []);
 
-  const resetForm = () => {
-    setEmail('');
-    setPassword('');
-    setUsername('');
-    setConfirmPassword('');
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSuccessMessage('');
     setLoading(true);
     
-    try {
-      if (isLogin) {
-        // Login with Firebase
-        await signInWithEmailAndPassword(auth, email, password);
-        navigate('/home');
-      } else {
-        // Validate passwords match
-        if (password !== confirmPassword) {
-          throw new Error('Passwords do not match');
-        }
-        
-        // Create new user with Firebase
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        
-        // Update profile with username
-        if (userCredential.user) {
-          await updateProfile(userCredential.user, {
-            displayName: username
-          });
-          
-          // Sign out the user after successful registration
-          await signOut(auth);
-          
-          // Show success message and switch to login form
-          setSuccessMessage('Account created successfully! Please log in to continue.');
-          setIsLogin(true);
-          resetForm();
-        }
-      }
-    } catch (err) {
-      console.error(err);
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
       setLoading(false);
-    }
+      // Redirect to dashboard or show success message
+      console.log('Form submitted:', { email, password, username });
+      // For demo purposes only
+      alert(isLogin ? 'Login successful!' : 'Account created successfully!');
+    }, 1500);
   };
 
   return (
@@ -206,37 +159,17 @@ const AuthPage: React.FC = () => {
           <div className="flex mb-6">
             <button
               className={`flex-1 py-2 transition-all ${isLogin ? 'text-white border-b-2 border-purple-500' : 'text-gray-400'}`}
-              onClick={() => {
-                setIsLogin(true);
-                setError('');
-                setSuccessMessage('');
-              }}
+              onClick={() => setIsLogin(true)}
             >
               Login
             </button>
             <button
               className={`flex-1 py-2 transition-all ${!isLogin ? 'text-white border-b-2 border-purple-500' : 'text-gray-400'}`}
-              onClick={() => {
-                setIsLogin(false);
-                setError('');
-                setSuccessMessage('');
-              }}
+              onClick={() => setIsLogin(false)}
             >
               Sign Up
             </button>
           </div>
-          
-          {error && (
-            <div className="mb-4 p-3 bg-red-500/20 border border-red-500/40 rounded-lg text-red-200">
-              {error}
-            </div>
-          )}
-          
-          {successMessage && (
-            <div className="mb-4 p-3 bg-green-500/20 border border-green-500/40 rounded-lg text-green-200">
-              {successMessage}
-            </div>
-          )}
           
           <form onSubmit={handleSubmit}>
             {!isLogin && (
@@ -326,11 +259,7 @@ const AuthPage: React.FC = () => {
             <p className="text-gray-400">
               {isLogin ? 'New to Cosmic Explorer?' : 'Already have an account?'}
               <button
-                onClick={() => {
-                  setIsLogin(!isLogin);
-                  setError('');
-                  setSuccessMessage('');
-                }}
+                onClick={() => setIsLogin(!isLogin)}
                 className="ml-2 text-purple-400 hover:text-purple-300"
               >
                 {isLogin ? 'Sign Up' : 'Login'}

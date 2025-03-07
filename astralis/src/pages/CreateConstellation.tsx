@@ -188,7 +188,7 @@ const CreateConstellation: React.FC = () => {
 
     // Here you would typically save to your backend
     console.log('Saving constellation:', constellation);
-    navigate('/');
+    navigate('/starconstellation');
   }, [constellationName, stars, connections, navigate]);
 
   return (
@@ -250,7 +250,7 @@ const CreateConstellation: React.FC = () => {
         </button>
 
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/starconstellation')}
           className="px-4 py-2 bg-red-600 rounded-lg text-white hover:bg-red-500 transition-colors duration-300 flex items-center gap-2"
         >
           <X size={20} />
