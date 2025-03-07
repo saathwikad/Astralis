@@ -6,3 +6,5 @@ Features :
 Interactive Landing Page
 Star Constellations
 3D Solar System
+Game
+News Feed
