@@ -6,6 +6,8 @@ import CreateConstellation from  './pages/CreateConstellation';
 import AstronomyLanding from './pages/LandingPage';
 import AuthPage from './pages/Authentication';
 import HomePage from './pages/HomePage';
+import Home from './pages/Home';
+import UserConstellations from './components/UserConstellations';
 
 const RedirectSite = () => {
   window.location.href = "./solarsystem/index.html";
@@ -23,7 +25,9 @@ function App() {
         <Route path="/create" element={<CreateConstellation />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/solarsystem" element={<RedirectSite />} />
+        <Route path="/user-constellations" element={<UserConstellations />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/homepage" element={<Home />} />
       </Routes>
     </Router>
   );

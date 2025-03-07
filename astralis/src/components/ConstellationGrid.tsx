@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Constellation } from '../assets/types';
 import { ConstellationCard } from './ConstellationCard';
+import { getUserConstellations } from '../firebase/constellationService';
+import { auth } from '../firebase/config';
+import { Home } from 'lucide-react';
 
 export const MAJOR_CONSTELLATIONS: Constellation[] = [
   {
@@ -203,19 +207,73 @@ export const MAJOR_CONSTELLATIONS: Constellation[] = [
 ];
 
 const ConstellationGrid: React.FC = () => {
+  const navigate = useNavigate();
+  const [constellations, setConstellations] = useState<Constellation[]>(MAJOR_CONSTELLATIONS);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserConstellations = async () => {
+      try {
+        setLoading(true);
+        const userConstellations = await getUserConstellations();
+        
+        setConstellations([
+          MAJOR_CONSTELLATIONS[0], // Keep the "Create Constellation" card
+          ...userConstellations,
+          ...MAJOR_CONSTELLATIONS.slice(1) // Add the default constellations
+        ]);
+      } catch (err) {
+        console.error('Error fetching constellations:', err);
+        setError('Failed to load user constellations');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserConstellations();
+  }, []);
+
+  const navigateToHome = () => {
+    navigate('/home');
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 p-8">
-      <h1 className="text-4xl font-bold text-center text-white mb-12">
-        Explore Constellations
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {MAJOR_CONSTELLATIONS.map((constellation) => (
-          <ConstellationCard
-            key={constellation.id}
-            constellation={constellation}
-          />
-        ))}
+      <div className="flex justify-between items-center mb-12">
+        <h1 className="text-4xl font-bold text-white">
+          Explore Constellations
+        </h1>
+        <button
+          onClick={navigateToHome}
+          className="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-500 transition-colors duration-300 flex items-center gap-2"
+        >
+          <Home size={20} />
+          Home
+        </button>
       </div>
+      
+      {loading ? (
+        <div className="text-white text-center py-8">Loading constellations...</div>
+      ) : error ? (
+        <div className="text-red-500 text-center py-8">{error}</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {constellations.map((constellation) => (
+            <ConstellationCard
+              key={constellation.id}
+              constellation={constellation}
+            />
+          ))}
+        </div>
+      )}
+
+      {auth.currentUser && (
+        <div className="mt-8 text-center text-gray-400">
+          <p>You are logged in as {auth.currentUser.email}</p>
+          <p className="mt-2">Create your own constellations and they'll appear here!</p>
+        </div>
+      )}
     </div>
   );
 };

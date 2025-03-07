@@ -173,7 +173,7 @@ const HomePage: React.FC = () => {
       {/* Header / Navigation */}
       <header className="absolute top-0 left-0 right-0 z-10 backdrop-blur-sm bg-black/20 border-b border-purple-500/20">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-white">Cosmic Explorer</div>
+          <div className="text-2xl font-bold text-white">Astralis</div>
           <div className="flex items-center space-x-4">
             <span className="text-purple-300">Welcome, {userName}</span>
             <button 
@@ -189,7 +189,7 @@ const HomePage: React.FC = () => {
       {/* Main content area with navigation buttons */}
       <main className="absolute inset-0 pt-16 px-6 flex items-center justify-center">
         <div className="backdrop-blur-md bg-black/30 border border-purple-500/20 rounded-xl p-8 max-w-4xl w-full">
-          <h1 className="text-3xl font-bold text-white mb-4 text-center">Home Dashboard</h1>
+          <h1 className="text-3xl font-bold text-white mb-4 text-center">Dashboard</h1>
           <p className="text-purple-200 text-center mb-8">
             Your cosmic journey begins here. Choose your destination.
           </p>
@@ -201,7 +201,7 @@ const HomePage: React.FC = () => {
               className="px-6 py-4 rounded-xl bg-indigo-600/30 border border-indigo-500/40 text-white hover:bg-indigo-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
               <span className="text-xl mb-1">Star Constellation</span>
-              <span className="text-xs text-indigo-200">React Component</span>
+              <span className="text-xs text-indigo-200">View the 12 major star constellations and Creae your own one!</span>
             </Link>
             
             {/* Button 2: Navigate to Galaxy Map React Component */}
@@ -209,7 +209,7 @@ const HomePage: React.FC = () => {
               to="/galaxy-map" 
               className="px-6 py-4 rounded-xl bg-purple-600/30 border border-purple-500/40 text-white hover:bg-purple-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
-              <span className="text-xl mb-1">Galaxy Map</span>
+              <span className="text-xl mb-1">Astro News</span>
               <span className="text-xs text-purple-200">React Component</span>
             </Link>
             
@@ -221,7 +221,7 @@ const HomePage: React.FC = () => {
               className="px-6 py-4 rounded-xl bg-blue-600/30 border border-blue-500/40 text-white hover:bg-blue-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
               <span className="text-xl mb-1">Solar System</span>
-              <span className="text-xs text-blue-200">External Website</span>
+              <span className="text-xs text-blue-200">Watch the planets and stars move in incredible orbits!</span>
             </a>
             
             {/* Button 4: Open Static HTML File */}
@@ -229,7 +229,7 @@ const HomePage: React.FC = () => {
               onClick={openHtmlFile} 
               className="px-6 py-4 rounded-xl bg-teal-600/30 border border-teal-500/40 text-white hover:bg-teal-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
-              <span className="text-xl mb-1">Star Map</span>
+              <span className="text-xl mb-1">Star Show</span>
               <span className="text-xs text-teal-200">Interactive HTML</span>
             </button>
           </div>

@@ -1,3 +1,4 @@
+// src/components/CreateConstellation.tsx
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Canvas, ThreeEvent } from '@react-three/fiber';
@@ -5,6 +6,8 @@ import { OrbitControls, Stars, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { X, Save } from 'lucide-react';
 import ConstellationTutorial from './ConstellationTutorial';
+import { saveConstellation } from '../firebase/constellationService';
+import { auth } from '../firebase/config';
 
 interface Star {
   position: [number, number, number];
@@ -149,6 +152,8 @@ const CreateConstellation: React.FC = () => {
   const [mode, setMode] = useState<'add' | 'connect' | 'delete'>('add');
   const [constellationName, setConstellationName] = useState('');
   const [isTutorialOpen, setIsTutorialOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAddStar = useCallback((position: [number, number, number]) => {
     setStars(prev => [...prev, { position, id: prev.length }]);
@@ -173,22 +178,44 @@ const CreateConstellation: React.FC = () => {
     }
   }, [mode, selectedStar]);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback(async () => {
+    if (!auth.currentUser) {
+      alert('Please sign in to save your constellation');
+      navigate('/login');
+      return;
+    }
+
     if (!constellationName) {
       alert('Please enter a name for your constellation');
       return;
     }
 
-    const constellation = {
-      id: Date.now(),
-      name: constellationName,
-      starPositions: stars.map(star => star.position),
-      connections: connections.map(conn => [conn.start, conn.end])
-    };
+    if (stars.length < 2) {
+      alert('Please add at least 2 stars to your constellation');
+      return;
+    }
 
-    // Here you would typically save to your backend
-    console.log('Saving constellation:', constellation);
-    navigate('/starconstellation');
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const constellation = {
+        name: constellationName,
+        latinName: constellationName,
+        season: 'Spring' as const,
+        description: `Custom constellation created by ${auth.currentUser.displayName || 'a user'}`,
+        starPositions: stars.map(star => Array.from(star.position) as [number, number, number]),
+        connections: connections.map(conn => [conn.start, conn.end] as [number, number]),
+      };
+
+      await saveConstellation(constellation);
+      navigate('/starconstellation');
+    } catch (err) {
+      console.error('Error saving constellation:', err);
+      setError('Failed to save constellation. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   }, [constellationName, stars, connections, navigate]);
 
   return (
@@ -198,7 +225,7 @@ const CreateConstellation: React.FC = () => {
         onClose={() => setIsTutorialOpen(false)}
       />
 
-      <div className="absolute top-4 left-4 z-10 space-x-4 flex items-center">
+      <div className="absolute top-4 left-4 z-10 space-x-4 flex items-center flex-wrap gap-2">
         <input 
           type="text"
           placeholder="Constellation Name"
@@ -243,10 +270,13 @@ const CreateConstellation: React.FC = () => {
 
         <button
           onClick={handleSave}
-          className="px-4 py-2 bg-green-600 rounded-lg text-white hover:bg-green-500 transition-colors duration-300 flex items-center gap-2"
+          disabled={isLoading}
+          className={`px-4 py-2 ${
+            isLoading ? 'bg-gray-600' : 'bg-green-600 hover:bg-green-500'
+          } rounded-lg text-white transition-colors duration-300 flex items-center gap-2`}
         >
           <Save size={20} />
-          Save
+          {isLoading ? 'Saving...' : 'Save'}
         </button>
 
         <button
@@ -257,6 +287,12 @@ const CreateConstellation: React.FC = () => {
           Cancel
         </button>
       </div>
+
+      {error && (
+        <div className="absolute top-20 left-4 z-10 bg-red-500 text-white p-2 rounded">
+          {error}
+        </div>
+      )}
 
       <Canvas className="h-full">
         <Scene
