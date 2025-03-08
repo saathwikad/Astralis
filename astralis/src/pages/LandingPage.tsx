@@ -204,7 +204,7 @@ const AstronomyLanding: React.FC = () => {
             titleVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          Cosmic Explorer
+          Astralis
         </h1>
         <button
           onClick={handleExplore}

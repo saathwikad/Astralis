@@ -324,7 +324,7 @@ const AuthPage: React.FC = () => {
           
           <div className="mt-6 pt-6 border-t border-purple-500/30 text-center">
             <p className="text-gray-400">
-              {isLogin ? 'New to Cosmic Explorer?' : 'Already have an account?'}
+              {isLogin ? 'New to Astralis?' : 'Already have an account?'}
               <button
                 onClick={() => {
                   setIsLogin(!isLogin);

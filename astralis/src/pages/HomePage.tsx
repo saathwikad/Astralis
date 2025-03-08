@@ -206,16 +206,16 @@ const HomePage: React.FC = () => {
             
             {/* Button 2: Navigate to Galaxy Map React Component */}
             <Link 
-              to="/galaxy-map" 
+              to="/game" 
               className="px-6 py-4 rounded-xl bg-purple-600/30 border border-purple-500/40 text-white hover:bg-purple-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
-              <span className="text-xl mb-1">Astro News</span>
-              <span className="text-xs text-purple-200">React Component</span>
+              <span className="text-xl mb-1">Space Dice</span>
+              <span className="text-xs text-purple-200">Play Fun Games!</span>
             </Link>
             
             {/* Button 3: External URL */}
             <a 
-              href="http://localhost:5174/" 
+              href="http://localhost:5173/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-6 py-4 rounded-xl bg-blue-600/30 border border-blue-500/40 text-white hover:bg-blue-600/50 transition-all text-center font-medium flex flex-col items-center"
@@ -230,7 +230,7 @@ const HomePage: React.FC = () => {
               className="px-6 py-4 rounded-xl bg-purple-600/30 border border-purple-500/40 text-white hover:bg-purple-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
               <span className="text-xl mb-1">Astro News</span>
-              <span className="text-xs text-purple-200">React Component</span>
+              <span className="text-xs text-purple-200">Catch up with the latest space news!</span>
             </Link>
           </div>
         </div>
