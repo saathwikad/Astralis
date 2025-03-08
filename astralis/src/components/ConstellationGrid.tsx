@@ -218,14 +218,23 @@ const ConstellationGrid: React.FC = () => {
         setLoading(true);
         const userConstellations = await getUserConstellations();
         
-        setConstellations([
-          MAJOR_CONSTELLATIONS[0], // Keep the "Create Constellation" card
-          ...userConstellations,
-          ...MAJOR_CONSTELLATIONS.slice(1) // Add the default constellations
-        ]);
+        // Make sure we have valid data before updating state
+        if (Array.isArray(userConstellations)) {
+          setConstellations([
+            MAJOR_CONSTELLATIONS[0], // Keep the "Create Constellation" card
+            ...userConstellations,
+            ...MAJOR_CONSTELLATIONS.slice(1) // Add the default constellations
+          ]);
+        } else {
+          console.error('Invalid user constellations data:', userConstellations);
+          // Just use the default constellations if we can't get user data
+          setConstellations(MAJOR_CONSTELLATIONS);
+        }
       } catch (err) {
         console.error('Error fetching constellations:', err);
         setError('Failed to load user constellations');
+        // Fall back to default constellations on error
+        setConstellations(MAJOR_CONSTELLATIONS);
       } finally {
         setLoading(false);
       }

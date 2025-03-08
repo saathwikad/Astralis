@@ -215,7 +215,7 @@ const HomePage: React.FC = () => {
             
             {/* Button 3: External URL */}
             <a 
-              href="https://nasa.gov/solar-system/our-solar-system" 
+              href="http://localhost:5174/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-6 py-4 rounded-xl bg-blue-600/30 border border-blue-500/40 text-white hover:bg-blue-600/50 transition-all text-center font-medium flex flex-col items-center"
@@ -225,13 +225,13 @@ const HomePage: React.FC = () => {
             </a>
             
             {/* Button 4: Open Static HTML File */}
-            <button 
-              onClick={openHtmlFile} 
-              className="px-6 py-4 rounded-xl bg-teal-600/30 border border-teal-500/40 text-white hover:bg-teal-600/50 transition-all text-center font-medium flex flex-col items-center"
+            <Link 
+              to="/updates" 
+              className="px-6 py-4 rounded-xl bg-purple-600/30 border border-purple-500/40 text-white hover:bg-purple-600/50 transition-all text-center font-medium flex flex-col items-center"
             >
-              <span className="text-xl mb-1">Star Show</span>
-              <span className="text-xs text-teal-200">Interactive HTML</span>
-            </button>
+              <span className="text-xl mb-1">Astro News</span>
+              <span className="text-xs text-purple-200">React Component</span>
+            </Link>
           </div>
         </div>
       </main>

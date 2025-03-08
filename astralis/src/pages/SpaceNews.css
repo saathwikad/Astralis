@@ -1,0 +1,203 @@
+.space-news {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000428, #004e92);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  
+  .navigation-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 20px;
+  }
+  
+  .home-button-container {
+    margin-top: 10px;
+  }
+  
+  .home-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #FFD700;
+    border-radius: 30px;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .home-button:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .home-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-top: 20px;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+  
+  .date-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+  }
+  
+  .date-picker-container h2 {
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .date-picker {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 2px solid #FFD700;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    cursor: pointer;
+  }
+  
+  .calendar {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .loading {
+    font-size: 1.5rem;
+    color: #FFD700;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .error {
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .news-item {
+    background: rgba(0, 0, 0, 0.8);
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .news-item h3 {
+    font-size: 1.8rem;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .news-item p {
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    line-height: 1.5;
+  }
+  
+  .news-details {
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  
+  .news-details .date {
+    font-size: 1.1rem;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .news-details img, 
+  .news-details iframe {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
+    max-height: 500px;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  footer {
+    margin-top: 50px;
+    font-size: 1.1rem;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+  }
+  
+  /* Animation for stars in background */
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+  
+  .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration, 2s) infinite ease-in-out;
+    animation-delay: var(--delay, 0s);
+  }
+  
+  /* Responsive layout */
+  @media (max-width: 768px) {
+    .news-item {
+      width: 95%;
+    }
+    
+    .title {
+      font-size: 2.2rem;
+    }
+    
+    .home-button {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+    
+    .home-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
